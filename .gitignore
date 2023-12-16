@@ -1,0 +1,9 @@
+.cache/
+.data*/
+.DS_Store
+.idea
+*.pyc
+*.pyo
+venv/
+offisync/settings/local.py
+.env
