@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # local
     'offices',
+    'employees',
 
     # custom installed
     'cities_light',
