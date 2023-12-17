@@ -5,42 +5,69 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('offices', '0001_initial'),
+        ("offices", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Employee',
+            name="Employee",
             fields=[
-                ('employee_id', models.CharField(max_length=20, primary_key=True, serialize=False, unique=True)),
-                ('first_name', models.CharField(max_length=24)),
-                ('last_name', models.CharField(max_length=24)),
+                (
+                    "employee_id",
+                    models.CharField(
+                        max_length=20, primary_key=True, serialize=False, unique=True
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=24)),
+                ("last_name", models.CharField(max_length=24)),
             ],
             options={
-                'verbose_name': 'Employee',
-                'verbose_name_plural': 'Employees',
+                "verbose_name": "Employee",
+                "verbose_name_plural": "Employees",
             },
         ),
         migrations.CreateModel(
-            name='WorkHistory',
+            name="WorkHistory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('start_date', models.DateField()),
-                ('end_date', models.DateField(blank=True, null=True)),
-                ('employee', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='employees.employee')),
-                ('office', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='offices.office')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("start_date", models.DateField()),
+                ("end_date", models.DateField(blank=True, null=True)),
+                (
+                    "employee",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="employees.employee",
+                    ),
+                ),
+                (
+                    "office",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="offices.office"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Work history',
-                'verbose_name_plural': 'Work histories',
+                "verbose_name": "Work history",
+                "verbose_name_plural": "Work histories",
             },
         ),
         migrations.AddConstraint(
-            model_name='workhistory',
-            constraint=models.UniqueConstraint(condition=models.Q(('end_date__isnull', True)), fields=('employee',), name='unique_active_work_history'),
+            model_name="workhistory",
+            constraint=models.UniqueConstraint(
+                condition=models.Q(("end_date__isnull", True)),
+                fields=("employee",),
+                name="unique_active_work_history",
+            ),
         ),
     ]

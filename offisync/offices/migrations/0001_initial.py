@@ -5,24 +5,47 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('cities_light', '0011_alter_city_country_alter_city_region_and_more'),
+        ("cities_light", "0011_alter_city_country_alter_city_region_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Office',
+            name="Office",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('address', models.CharField(max_length=300)),
-                ('latitude', models.DecimalField(blank=True, decimal_places=5, max_digits=8, null=True)),
-                ('longitude', models.DecimalField(blank=True, decimal_places=5, max_digits=8, null=True)),
-                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cities_light.city')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("address", models.CharField(max_length=300)),
+                (
+                    "latitude",
+                    models.DecimalField(
+                        blank=True, decimal_places=5, max_digits=8, null=True
+                    ),
+                ),
+                (
+                    "longitude",
+                    models.DecimalField(
+                        blank=True, decimal_places=5, max_digits=8, null=True
+                    ),
+                ),
+                (
+                    "city",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="cities_light.city",
+                    ),
+                ),
             ],
-            options={'verbose_name': 'Office', 'verbose_name_plural': 'Offices'},
+            options={"verbose_name": "Office", "verbose_name_plural": "Offices"},
         ),
     ]
