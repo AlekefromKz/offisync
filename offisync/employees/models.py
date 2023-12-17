@@ -19,6 +19,7 @@ class WorkHistory(models.Model):
     office = models.ForeignKey("offices.Office", on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
+    last_checked = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.employee} - {self.office}"
