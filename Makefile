@@ -25,3 +25,7 @@ docker:
 
 logs:
 	@docker-compose logs -f
+
+load_initial_data:
+	@echo -e "Loading data for Office, Employee, and WorkHistory models..."
+	@docker-compose run --rm django ./manage.py loaddata employees/fixtures/initial.json
