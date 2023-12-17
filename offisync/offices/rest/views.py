@@ -17,7 +17,8 @@ class OfficeViewSet(mixins.ListModelMixin, GenericViewSet):
     filterset_class = OfficeFilter
 
     def get_queryset(self):
-        return Office.objects.select_related('city', 'city__country').all()
+        if self.action == "list":
+            return Office.objects.select_related('city', 'city__country').all()
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
