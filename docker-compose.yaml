@@ -19,3 +19,25 @@ services:
       - db
     ports:
       - 8000:8000
+
+  redis:
+    image: redis:latest
+    volumes:
+      - .data/redis:/data
+
+  celery-worker:
+    build: .
+    command: celery -A offisync worker --loglevel=info
+    volumes:
+      - ./offisync:/app
+    depends_on:
+      - redis
+
+  celery-beat:
+    build: .
+    command: celery -A offisync beat --loglevel=info --schedule=/var/lib/celery/beat/celerybeat-schedule
+    volumes:
+      - ./offisync:/app
+      - .data/celery-beat-data:/var/lib/celery/beat
+    depends_on:
+      - redis
