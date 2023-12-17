@@ -3,18 +3,24 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
       - .data/postgres-data:/var/lib/postgresql/data
 
   django:
     working_dir: /app/
     build: .
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      /bin/sh -c "
+        wait-for db:5432 -- 
+        python manage.py migrate &&
+        python manage.py runserver 0.0.0.0:8000
+      "
     volumes:
       - ./offisync:/app
+      - ./wait-for:/usr/local/bin/wait-for
       - ./.env:/app/.env
     depends_on:
       - db
