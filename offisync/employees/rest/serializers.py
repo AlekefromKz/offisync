@@ -11,6 +11,11 @@ class WorkHistorySerializer(serializers.ModelSerializer):
         fields = ['start_date', 'end_date', 'office']
 
 
+class ActiveWorkHistorySerializer(WorkHistorySerializer):
+    class Meta(WorkHistorySerializer.Meta):
+        fields = WorkHistorySerializer.Meta.fields + ['last_checked']
+
+
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
@@ -27,4 +32,4 @@ class EmployeeWorkHistorySerializer(EmployeeSerializer):
 
     def get_active_office(self, obj):
         active_office = getattr(obj, 'active_office', [])
-        return WorkHistorySerializer(active_office[0]).data if active_office else None
+        return ActiveWorkHistorySerializer(active_office[0]).data if active_office else None
