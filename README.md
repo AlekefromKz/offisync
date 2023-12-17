@@ -1,5 +1,16 @@
 # Offisync README
 
+## TODOs 
+
+In case I had more resources, I would do the following things:
+1. Add a schema generator, probably OpenAPI that would generate a schema on a `/api/schema` endpoint
+2. Add UI for that, Swagger UI 
+3. Add tests for the open-meteo integration 
+4. I would try to find a python package for the open-meteo service and use it instead
+5. Improve logging 
+6. Add CI-CD 
+7. Maybe add internationalization and localization if needed for end users
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing
@@ -15,7 +26,7 @@ purposes.
 Clone the repository:
 
 ```bash
-git clone `git@github.com:AlekefromKz/offisync.git`
+git clone git@github.com:AlekefromKz/offisync.git
 cd offisync
 ```
 
