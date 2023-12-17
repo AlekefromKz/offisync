@@ -18,6 +18,12 @@ git clone `https://github.com/AlekefromKz/offisync`
 cd offisync
 ```
 
+Copy the sample environment file:
+```bash
+make env
+```
+
+
 Run the setup command to build Docker images:
 ```bash
 make setup

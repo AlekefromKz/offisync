@@ -1,6 +1,6 @@
 # Makefile
 
-.PHONY: createsuperuser populate_cities setup docker
+.PHONY: createsuperuser populate_cities setup docker logs load_initial_data env
 
 createsuperuser:
 	@echo "Creating a django superuser..."
@@ -29,3 +29,7 @@ logs:
 load_initial_data:
 	@echo -e "Loading data for Office, Employee, and WorkHistory models..."
 	@docker-compose run --rm django ./manage.py loaddata employees/fixtures/initial.json
+
+env:
+	@cp .env.sample .env
+	@echo "Created .env file from .env.sample"
