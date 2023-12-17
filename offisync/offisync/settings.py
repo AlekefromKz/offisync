@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'cities_light',
     'rest_framework',
     'rest_framework_api_key',
+    'silk',
 
     # default
     'django.contrib.admin',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'offisync.urls'

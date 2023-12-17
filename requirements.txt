@@ -11,3 +11,4 @@ djangorestframework-api-key==3.0.0
 celery==5.3.6
 django-redis==5.4.0
 python-dotenv==0.15.0
+django-silk==5.0.4
