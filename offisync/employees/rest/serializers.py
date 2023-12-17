@@ -8,7 +8,7 @@ class WorkHistorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WorkHistory
-        fields = ['office', 'start_date', 'end_date']
+        fields = ['start_date', 'end_date', 'office']
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -18,9 +18,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 
 class EmployeeWorkHistorySerializer(EmployeeSerializer):
-    active_offices = WorkHistorySerializer(many=True, read_only=True, source='active_work_histories')
-    previous_offices = WorkHistorySerializer(many=True, read_only=True, source='previous_work_histories')
+    active_office = serializers.SerializerMethodField()
+    previous_offices = WorkHistorySerializer(many=True, read_only=True)
 
     class Meta(EmployeeSerializer.Meta):
         model = Employee
-        fields = [*EmployeeSerializer.Meta.fields, 'active_offices', 'previous_offices']
+        fields = [*EmployeeSerializer.Meta.fields, 'active_office', 'previous_offices']
+
+    def get_active_office(self, obj):
+        active_office = getattr(obj, 'active_office', [])
+        return WorkHistorySerializer(active_office[0]).data if active_office else None

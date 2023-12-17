@@ -26,3 +26,10 @@ class WorkHistory(models.Model):
     class Meta:
         verbose_name = "Work history"
         verbose_name_plural = "Work histories"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['employee'],
+                condition=models.Q(end_date__isnull=True),
+                name='unique_active_work_history'
+            )
+        ]

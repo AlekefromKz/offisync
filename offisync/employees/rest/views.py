@@ -17,10 +17,10 @@ class EmployeeViewSet(
     filterset_class = EmployeeFilter
 
     def get_queryset(self):
-        active_histories = WorkHistory.objects.filter(end_date__isnull=True).select_related('office')
-        previous_histories = WorkHistory.objects.filter(end_date__isnull=False).select_related('office')
+        active_office_queryset = WorkHistory.objects.filter(end_date__isnull=True).select_related('office')
+        previous_offices_queryset = WorkHistory.objects.filter(end_date__isnull=False).select_related('office')
 
-        return Employee.objects.prefetch_related(
-            Prefetch('workhistory_set', queryset=active_histories, to_attr='active_work_histories'),
-            Prefetch('workhistory_set', queryset=previous_histories, to_attr='previous_work_histories')
+        return self.queryset.prefetch_related(
+            Prefetch('workhistory_set', queryset=active_office_queryset, to_attr='active_office'),
+            Prefetch('workhistory_set', queryset=previous_offices_queryset, to_attr='previous_offices')
         )
