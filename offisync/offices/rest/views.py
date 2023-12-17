@@ -33,7 +33,12 @@ class OfficeViewSet(mixins.ListModelMixin, GenericViewSet):
             workhistory__end_date__isnull=True
         ).distinct()
 
-        serializer = EmployeeSerializer(active_employees, many=True)
+        page = self.paginate_queryset(active_employees)
+        if page is not None:
+            serializer = EmployeeSerializer(page, many=True, context={'request': request})
+            return self.get_paginated_response(serializer.data)
+
+        serializer = EmployeeSerializer(active_employees, many=True, context={'request': request})
         return Response(serializer.data)
 
     def fetch_temperature_data_for_offices(self, queryset):
