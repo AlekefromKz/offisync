@@ -10,7 +10,7 @@ populate_cities:
 	@echo "Populating cities using django cities light..."
 	@docker-compose run --rm django python manage.py cities_light
 
-setup:
+setup: env
 	@echo -e "$(CYAN)Creating Docker images$(COFF)"
 	@docker-compose build
 
