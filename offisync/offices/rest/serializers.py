@@ -19,6 +19,19 @@ class CitySerializer(serializers.ModelSerializer):
 
 
 class OfficeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Office
+        fields = [
+            "id",
+            "name",
+        ]
+
+    def get_current_temperature(self, obj):
+        temperature_data = self.context.get("temperature_data", {})
+        return temperature_data.get(obj.id)
+
+
+class OfficeTemperatureSerializer(serializers.ModelSerializer):
     current_temperature = serializers.SerializerMethodField()
     city = CitySerializer(read_only=True)
 

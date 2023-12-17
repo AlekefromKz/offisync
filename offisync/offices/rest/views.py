@@ -9,12 +9,12 @@ from employees.rest.serializers import EmployeeSerializer
 from offices.models import Office
 
 from .filters import OfficeFilter
-from .serializers import OfficeSerializer
+from .serializers import OfficeTemperatureSerializer
 
 
 class OfficeViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Office.objects.all()
-    serializer_class = OfficeSerializer
+    serializer_class = OfficeTemperatureSerializer
     filterset_class = OfficeFilter
 
     def get_queryset(self):
