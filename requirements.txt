@@ -7,3 +7,4 @@ psycopg2-binary==2.8.6
 django-cities-light==3.10.0
 django-filter==23.5
 requests==2.31.0
+djangorestframework-api-key==3.0.0

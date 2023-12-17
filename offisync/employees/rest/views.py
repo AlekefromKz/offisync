@@ -1,5 +1,4 @@
 from django.db.models import Prefetch
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins
 
 from rest_framework.viewsets import GenericViewSet
@@ -13,7 +12,6 @@ class EmployeeViewSet(
     mixins.ListModelMixin,
     GenericViewSet
 ):
-    permission_classes = []
     queryset = Employee.objects.all().prefetch_related('workhistory_set__office')
     serializer_class = EmployeeWorkHistorySerializer
     filterset_class = EmployeeFilter

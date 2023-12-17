@@ -14,7 +14,6 @@ from .filters import OfficeFilter
 class OfficeViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Office.objects.all()
     serializer_class = OfficeSerializer
-    permission_classes = []
     filterset_class = OfficeFilter
 
     def get_queryset(self):
